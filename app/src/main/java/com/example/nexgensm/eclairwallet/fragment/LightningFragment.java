@@ -3,6 +3,7 @@ package com.example.nexgensm.eclairwallet.fragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -78,8 +79,19 @@ public class LightningFragment extends Fragment {
         binding.setLightningPresenter(new LightningPresenter() {
             @Override
             public void regularPayment() {
+                String tag="Lightning";
                 Toast.makeText(getContext(), "hii", Toast.LENGTH_SHORT).show();
                 Fragment fragment = new NewRegularPaymentFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+
+            @Override
+            public void manageregularPayment() {
+                Fragment fragment = new ManageRegularPamentFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame, fragment);

@@ -20,8 +20,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.nexgensm.eclairwallet.fragment.FirsrtFragment;
 import com.example.nexgensm.eclairwallet.fragment.LightningFragment;
+import com.example.nexgensm.eclairwallet.fragment.NotificationFragment;
 
 public class SimplePagerAdapter extends FragmentStatePagerAdapter {
   int tabCount;
@@ -41,10 +41,10 @@ public class SimplePagerAdapter extends FragmentStatePagerAdapter {
     //Returning the current tabs
     switch (position) {
       case 0:
-        FirsrtFragment tab1 = new FirsrtFragment();
+        LightningFragment tab1 = new LightningFragment();
         return tab1;
       case 1:
-        LightningFragment tab2 = new LightningFragment();
+        NotificationFragment tab2 = new NotificationFragment();
         return tab2;
 
       default:

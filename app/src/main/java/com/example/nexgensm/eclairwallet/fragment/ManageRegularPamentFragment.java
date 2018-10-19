@@ -9,19 +9,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.nexgensm.eclairwallet.R;
-import com.example.nexgensm.eclairwallet.databinding.FragmentNewRegularPaymentBinding;
-import com.example.nexgensm.eclairwallet.presenter.NewRegularPaymentPresenter;
+import com.example.nexgensm.eclairwallet.databinding.FragmentManageRegularPamentBinding;
+import com.example.nexgensm.eclairwallet.presenter.ManageRegularPaymentPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewRegularPaymentFragment extends Fragment {
+public class ManageRegularPamentFragment extends Fragment {
 
 
-    public NewRegularPaymentFragment() {
+    public ManageRegularPamentFragment() {
         // Required empty public constructor
     }
 
@@ -30,28 +29,20 @@ public class NewRegularPaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       FragmentNewRegularPaymentBinding binding= DataBindingUtil.inflate(inflater,
-               R.layout.fragment_new_regular_payment, container, false);
-        View root = binding.getRoot();
-        binding.setNewRegularPaymentPresenter(new NewRegularPaymentPresenter() {
+        FragmentManageRegularPamentBinding binding= DataBindingUtil.inflate(inflater,R.layout.fragment_manage_regular_pament,container,false);
+        View root=binding.getRoot();
+        binding.setManageRegularPaymentPresenter(new ManageRegularPaymentPresenter() {
             @Override
-            public void scan() {
-
-            }
-
-            @Override
-            public void confirm() {
-                //Toast.makeText(getContext(), "hii", Toast.LENGTH_SHORT).show();
-                String tag="regular Payment";
-                Fragment fragment = new SummaryPurchaseFragment();
+            public void view() {
+                Fragment fragment = new InviceScheduleDetailsFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.content_regular, fragment);
+                fragmentTransaction.replace(((ViewGroup)(getView().getParent())).getId(), fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
-        return root;
+        return  root;
     }
 
 }

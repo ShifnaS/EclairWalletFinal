@@ -9,19 +9,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.nexgensm.eclairwallet.R;
 import com.example.nexgensm.eclairwallet.databinding.FragmentNewRegularPaymentBinding;
-import com.example.nexgensm.eclairwallet.presenter.NewRegularPaymentPresenter;
+import com.example.nexgensm.eclairwallet.databinding.FragmentNotificationBinding;
+import com.example.nexgensm.eclairwallet.presenter.NotificationPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewRegularPaymentFragment extends Fragment {
+public class NotificationFragment extends Fragment {
 
 
-    public NewRegularPaymentFragment() {
+    public NotificationFragment() {
         // Required empty public constructor
     }
 
@@ -30,25 +30,22 @@ public class NewRegularPaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       FragmentNewRegularPaymentBinding binding= DataBindingUtil.inflate(inflater,
-               R.layout.fragment_new_regular_payment, container, false);
-        View root = binding.getRoot();
-        binding.setNewRegularPaymentPresenter(new NewRegularPaymentPresenter() {
+        FragmentNotificationBinding binding= DataBindingUtil.inflate(inflater,R.layout.fragment_notification, container, false);
+        View root=binding.getRoot();
+        binding.setNotificationPresenter(new NotificationPresenter() {
             @Override
-            public void scan() {
-
+            public void makePayment() {
+                Fragment fragment = new PaymentSuccessRegularFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_notification, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
 
             @Override
-            public void confirm() {
-                //Toast.makeText(getContext(), "hii", Toast.LENGTH_SHORT).show();
-                String tag="regular Payment";
-                Fragment fragment = new SummaryPurchaseFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.content_regular, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+            public void cancel() {
+
             }
         });
         return root;

@@ -9,10 +9,10 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.nexgensm.eclairwallet.R;
 import com.example.nexgensm.eclairwallet.adapter.SimplePagerAdapter;
-import com.example.nexgensm.eclairwallet.fragment.FirsrtFragment;
 import com.example.nexgensm.eclairwallet.fragment.LightningFragment;
+import com.example.nexgensm.eclairwallet.fragment.SummaryPurchaseFragment;
 
-public class HomeActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener,LightningFragment.OnFragmentInteractionListener,FirsrtFragment.OnFragmentInteractionListener{
+public class HomeActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener,LightningFragment.OnFragmentInteractionListener,SummaryPurchaseFragment.OnFragmentInteractionListener{
     //This is our tablayout
     private TabLayout tabLayout;
 
@@ -30,8 +30,8 @@ public class HomeActivity extends AppCompatActivity implements TabLayout.OnTabSe
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("First"));
         tabLayout.addTab(tabLayout.newTab().setText("Lightning Collect"));
+        tabLayout.addTab(tabLayout.newTab().setText("Notification"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Initializing viewPager
@@ -66,4 +66,10 @@ public class HomeActivity extends AppCompatActivity implements TabLayout.OnTabSe
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+   /* @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }*/
 }

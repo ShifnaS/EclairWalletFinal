@@ -1,24 +1,30 @@
 package com.example.nexgensm.eclairwallet.fragment;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.nexgensm.eclairwallet.R;
+import com.example.nexgensm.eclairwallet.databinding.FragmentSummaryPurchaseBinding;
+import com.example.nexgensm.eclairwallet.presenter.SummaryPurchasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FirsrtFragment.OnFragmentInteractionListener} interface
+ * {@link SummaryPurchaseFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FirsrtFragment#newInstance} factory method to
+ * Use the {@link SummaryPurchaseFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FirsrtFragment extends Fragment {
+public class SummaryPurchaseFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +36,7 @@ public class FirsrtFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FirsrtFragment() {
+    public SummaryPurchaseFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +46,11 @@ public class FirsrtFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FirsrtFragment.
+     * @return A new instance of fragment SummaryPurchaseFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FirsrtFragment newInstance(String param1, String param2) {
-        FirsrtFragment fragment = new FirsrtFragment();
+    public static SummaryPurchaseFragment newInstance(String param1, String param2) {
+        SummaryPurchaseFragment fragment = new SummaryPurchaseFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +71,26 @@ public class FirsrtFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root=inflater.inflate(R.layout.fragment_firsrt, container, false);
+        FragmentSummaryPurchaseBinding binding= DataBindingUtil.inflate(inflater,R.layout.fragment_summary_purchase, container, false);
+        View root=binding.getRoot();
+        binding.setSummaryPurchasePresenter(new SummaryPurchasePresenter() {
+            @Override
+            public void confirm() {
+               // Toast.makeText(getContext(), "hii", Toast.LENGTH_SHORT).show();
+                Fragment fragment = new ConfirmationFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_summary, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+        });
         return root;
     }
 

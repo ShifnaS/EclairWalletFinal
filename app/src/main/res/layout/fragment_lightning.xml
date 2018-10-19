@@ -53,11 +53,14 @@
                     />
             </LinearLayout>
             <Button
+                android:id="@+id/regularpay"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/manage_regular_payment"
+                android:onClick="@{(v)->lightningPresenter.manageregularPayment()}"
+
                 android:textColor="@color/yellow"
                 android:background="@drawable/rounded_corner_button"
                 />
